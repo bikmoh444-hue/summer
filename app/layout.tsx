@@ -9,7 +9,7 @@ const cairo = Cairo({ subsets: ["arabic"], variable: "--font-arabic" });
 const pacifico = Pacifico({ subsets: ["latin"], weight: "400", variable: "--font-cocktail" });
 
 export const metadata: Metadata = {
-  title: "Cosmitiq Summer",
+  title: " Summer",
   description: "Boutique marocaine premium pour essentiels de plage."
 };
 
