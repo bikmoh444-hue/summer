@@ -1,0 +1,231 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #0e9fb8;
+  --secondary: #ff6f61;
+  --accent: #ffd166;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: #14323f;
+  background: #062b3a;
+  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+h1,
+h2,
+h3,
+.price-text {
+  font-family: var(--font-cocktail), "Pacifico", cursive;
+  color: #f5a623;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(26, 58, 74, 0.12);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff6b6b;
+  border-radius: 999px;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.summer-site {
+  background-image: var(--site-bg);
+  background-attachment: scroll;
+  background-position: center;
+  background-size: cover;
+  isolation: isolate;
+}
+
+.summer-overlay {
+  background:
+    radial-gradient(circle at top left, rgba(255, 209, 102, 0.18), transparent 28rem),
+    linear-gradient(135deg, rgba(3, 30, 41, 0.84), rgba(3, 70, 88, 0.56) 48%, rgba(255, 111, 97, 0.16));
+  position: relative;
+}
+
+.summer-overlay::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.22));
+  pointer-events: none;
+}
+
+.glass-panel,
+.glass-card {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 14px 42px rgba(4, 30, 40, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.glass-panel {
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+.glass-card {
+  border-radius: 24px;
+}
+
+.font-arabic {
+  font-family: var(--font-arabic), "Tajawal", "Cairo", "Segoe UI", Arial, sans-serif;
+}
+
+.font-french {
+  font-family: "Poppins", "Montserrat", "Segoe UI", Arial, sans-serif;
+}
+
+.premium-title {
+  letter-spacing: 0;
+  text-shadow: 0 16px 50px rgba(0, 0, 0, 0.25);
+}
+
+.font-cocktail {
+  font-family: var(--font-cocktail), "Pacifico", cursive;
+}
+
+.btn-coral {
+  @apply cursor-pointer rounded-full bg-[#FF6B6B] px-6 py-3 font-semibold text-white transition-all hover:bg-[#ff5252] active:scale-95;
+}
+
+.btn-outline-white {
+  @apply cursor-pointer rounded-full border-2 border-white/70 px-6 py-3 text-white transition-all hover:bg-white/20;
+}
+
+.form-input {
+  @apply w-full rounded-xl border border-white/25 bg-white/15 px-4 py-3 text-white placeholder:text-white/45 outline-none transition focus:border-sun focus:bg-white/20;
+}
+
+.card-glass {
+  @apply rounded-2xl border border-white/15 bg-white/10 backdrop-blur-[3px];
+}
+
+.card-product {
+  @apply relative min-h-[380px] cursor-pointer overflow-hidden rounded-2xl transition-transform duration-200 hover:scale-[1.015];
+  contain: layout paint;
+}
+
+.overlay-bottom {
+  @apply absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent p-4;
+}
+
+.shadow-glass {
+  box-shadow: 0 10px 30px rgba(2, 35, 48, 0.18);
+}
+
+.focus-ring:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 80%, white);
+  outline-offset: 2px;
+}
+
+.animate-rise {
+  animation: rise 420ms ease both;
+}
+
+.animate-float {
+  animation: rise 480ms ease both, float 9s ease-in-out infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.admin-shell {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(14, 159, 184, 0.18), transparent 28rem),
+    radial-gradient(circle at 100% 0%, rgba(255, 111, 97, 0.14), transparent 24rem),
+    #f5fbfc;
+}
+
+#packs,
+#products,
+#contact {
+  content-visibility: auto;
+  contain-intrinsic-size: 720px;
+}
+
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .summer-overlay {
+    background: linear-gradient(135deg, rgba(3, 30, 41, 0.86), rgba(3, 70, 88, 0.58) 52%, rgba(255, 111, 97, 0.14));
+  }
+
+  .summer-overlay::before {
+    position: absolute;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.18));
+  }
+
+  .glass-panel,
+  .glass-card,
+  .card-glass {
+    backdrop-filter: none;
+    box-shadow: 0 10px 24px rgba(4, 30, 40, 0.18);
+  }
+
+  .card-product {
+    transition: none;
+  }
+
+  .card-product:hover {
+    transform: none;
+  }
+
+  .animate-rise,
+  .animate-float {
+    animation: none;
+  }
+}
+
+@media (hover: none) {
+  .hover\:-translate-y-1:hover,
+  .hover\:-translate-y-0\.5:hover,
+  .hover\:scale-\[1\.015\]:hover,
+  .group:hover .group-hover\:scale-\[1\.03\] {
+    transform: none;
+  }
+}

@@ -1,0 +1,11 @@
+-- COSMITIQ SUMMER migration note
+--
+-- The canonical database definition is now sql/schema.sql.
+-- Run sql/schema.sql in the Supabase SQL editor, then run sql/seed.sql.
+--
+-- This file intentionally no longer adds legacy columns such as:
+-- discount_price, in_stock, display_order, product_ids, store_settings,
+-- customer_name/customer_phone/customer_address, items, or total_amount.
+-- The app now uses:
+-- landing_settings, products, packs, pack_products, orders, and order_items
+-- exactly as defined in sql/schema.sql.
