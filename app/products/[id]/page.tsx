@@ -77,7 +77,7 @@ function Header() {
   return (
     <header className="border-b border-white/15 bg-ocean/35 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
-        <Link href="/" className="font-cocktail text-2xl text-primary">Cosmitiq Summer</Link>
+        <Link href="/" className="font-cocktail text-2xl text-primary">Cosmitiq </Link>
         <Link href="/cart" className="btn-coral text-sm">Panier</Link>
       </div>
     </header>

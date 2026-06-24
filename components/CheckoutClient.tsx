@@ -120,7 +120,7 @@ export function CheckoutClient() {
       <div className="summer-overlay min-h-screen px-4 py-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-6 flex items-center justify-between gap-4">
-            <Link href="/" className="font-cocktail text-2xl text-primary">Cosmitiq Summer</Link>
+            <Link href="/" className="font-cocktail text-2xl text-primary"> Summer</Link>
             <Link href="/cart" className="btn-outline-white px-4 py-2 text-sm">Panier</Link>
           </div>
 
