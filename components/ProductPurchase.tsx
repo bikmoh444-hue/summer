@@ -3,24 +3,48 @@
 import { useState } from 'react';
 import { Minus, Plus } from 'lucide-react';
 import { AddProductButton } from '@/components/AddToCartButton';
-import type { Product } from '@/lib/types';
+import { activePrice, formatMad, productDescription } from '@/lib/pricing';
+import type { Lang, Product } from '@/lib/types';
 
-export function ProductPurchase({ product }: { product: Product }) {
+export function ProductPurchase({
+  product,
+  description = productDescription(product),
+  price = activePrice(product),
+  original = Number(product.price),
+  lang = 'fr',
+  showSummary = false
+}: {
+  product: Product;
+  description?: string;
+  price?: number;
+  original?: number;
+  lang?: Lang;
+  showSummary?: boolean;
+}) {
   const [quantity, setQuantity] = useState(1);
   return (
-    <div className="mt-7">
+    <div className="mt-6" onClick={(event) => event.stopPropagation()}>
+      {showSummary && (
+        <>
+          <p className="mt-2 line-clamp-2 text-sm text-white/80">{description}</p>
+          <div className="mt-4 flex items-end gap-3 text-sm">
+            <span className="price-text text-3xl">{formatMad(price)}</span>
+            {original > price && <span className="pb-1 font-bold text-white/55 line-through">{formatMad(original)}</span>}
+          </div>
+        </>
+      )}
       <div className="mb-4 inline-flex items-center rounded-full border border-white/25 bg-white/10 p-1">
-        <button type="button" onClick={() => setQuantity((value) => Math.max(1, value - 1))} className="grid h-10 w-10 place-items-center rounded-full bg-white/10">
+        <button type="button" onClick={() => setQuantity((value) => Math.max(1, value - 1))} className="grid h-10 w-10 place-items-center rounded-full bg-coral">
           <Minus className="h-4 w-4" />
         </button>
         <span className="w-12 text-center font-black">{quantity}</span>
-        <button type="button" onClick={() => setQuantity((value) => value + 1)} className="grid h-10 w-10 place-items-center rounded-full bg-white/10">
+        <button type="button" onClick={() => setQuantity((value) => value + 1)} className="grid h-10 w-10 place-items-center rounded-full bg-coral">
           <Plus className="h-4 w-4" />
         </button>
       </div>
-      <div className="flex flex-col gap-3 sm:flex-row [&>button]:justify-center">
-        <AddProductButton product={product} quantity={quantity} />
-        <AddProductButton product={product} quantity={quantity} orderNow />
+      <div className="grid gap-3 sm:grid-cols-2 [&>button]:w-full [&>button]:justify-center">
+        <AddProductButton product={product} quantity={quantity} lang={lang} />
+        <AddProductButton product={product} quantity={quantity} lang={lang} orderNow />
       </div>
     </div>
   );

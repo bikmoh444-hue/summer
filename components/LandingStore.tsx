@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { article as MotionArticle } from 'framer-motion/client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { BadgePercent, ChevronRight, Languages, ShoppingBag, Waves } from 'lucide-react';
+import { ChevronRight, Languages, ShoppingBag, Waves } from 'lucide-react';
 import { useCart } from '@/lib/cart';
-import { activePrice, formatMad, packActivePrice, packName, packOriginalPrice, productName } from '@/lib/pricing';
+import { activePrice, formatMad, packActivePrice, packName, packOriginalPrice, productDescription, productName } from '@/lib/pricing';
 import type { LandingSettings, Lang, Pack, Product } from '@/lib/types';
 
 export function LandingStore({ settings, products, packs }: { settings: LandingSettings; products: Product[]; packs: Pack[] }) {
@@ -74,15 +75,15 @@ export function LandingStore({ settings, products, packs }: { settings: LandingS
 
         <section id="packs" className="mx-auto max-w-7xl px-4 py-12">
           <SectionTitle title={content.packs_title} />
-          <div className="mt-7 grid gap-5 lg:grid-cols-2">
-            {packs.map((pack) => <PackCard key={pack.id} pack={pack} lang={lang} content={content} />)}
+          <div className="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {packs.map((pack, index) => <PackCard key={pack.id} pack={pack} lang={lang} content={content} index={index} />)}
           </div>
         </section>
 
         <section id="products" className="mx-auto max-w-7xl px-4 py-12">
           <SectionTitle title={content.products_title} />
-          <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {products.map((product) => <ProductCard key={product.id} product={product} lang={lang} content={content} />)}
+          <div className="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {products.map((product, index) => <ProductCard key={product.id} product={product} lang={lang} content={content} index={index} />)}
           </div>
         </section>
 
@@ -138,54 +139,108 @@ function FeaturedPack({ pack, lang, content }: { pack: Pack; lang: Lang; content
   );
 }
 
-function PackCard({ pack, lang, content }: { pack: Pack; lang: Lang; content: Record<string, string> }) {
-  const router = useRouter();
+function PackCard({ pack, lang, content, index }: { pack: Pack; lang: Lang; content: Record<string, string>; index: number }) {
   const price = packActivePrice(pack);
   const original = packOriginalPrice(pack);
   return (
-    <article onClick={() => router.push(`/packs/${pack.id}`)} className="card-product group shadow-lg">
-      <Image src={pack.image_url || '/beach-summer.png'} alt={packName(pack, lang)} fill sizes="(min-width: 1024px) 50vw, 100vw" loading="lazy" quality={70} className="object-cover transition duration-300 group-hover:scale-[1.03]" />
-      <div className="overlay-bottom">
-        <h3 className="text-2xl font-black">{packName(pack, lang)}</h3>
-        <p className="mt-2 line-clamp-2 text-sm text-white/80">{lang === 'ar' ? pack.description_ar : pack.description_fr}</p>
-        <PriceLine price={price} original={original} compact />
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Link href={`/packs/${pack.id}`} onClick={(event) => event.stopPropagation()} className="btn-outline-white px-4 py-2 text-sm">{content.view_details}</Link>
-          <CartPackButton pack={pack} lang={lang} label={content.add_to_cart} />
-        </div>
-      </div>
-    </article>
+    <StoreCard
+      href={`/packs/${pack.id}`}
+      image={pack.image_url || '/beach-summer.png'}
+      title={packName(pack, lang)}
+      description={lang === 'ar' ? pack.description_ar : pack.description_fr}
+      price={price}
+      original={original}
+      detailsLabel={content.view_details}
+      action={<CartPackButton pack={pack} lang={lang} label={content.add_to_cart} />}
+      imageSizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+      index={index}
+    />
   );
 }
 
-function ProductCard({ product, lang, content }: { product: Product; lang: Lang; content: Record<string, string> }) {
-  const router = useRouter();
+function ProductCard({ product, lang, content, index }: { product: Product; lang: Lang; content: Record<string, string>; index: number }) {
   const price = activePrice(product);
-  const discount = product.promo_price ? Math.round(((product.price - product.promo_price) / product.price) * 100) : 0;
+  const original = Number(product.price);
   return (
-    <article onClick={() => router.push(`/products/${product.id}`)} className="card-product group">
-      <Image src={product.image_url || '/beach-summer.png'} alt={productName(product, lang)} fill sizes="(min-width: 1024px) 33vw, 100vw" loading="lazy" quality={70} className="object-cover transition duration-300 group-hover:scale-[1.03]" />
-      {discount > 0 && <span className="absolute start-4 top-4 inline-flex items-center gap-1 rounded-full bg-coral px-3 py-1 text-xs font-black text-white"><BadgePercent className="h-3.5 w-3.5" />-{discount}%</span>}
-      <div className="overlay-bottom">
-        <h3 className="text-xl font-black">{productName(product, lang)}</h3>
-        <p className="price-text text-2xl">{formatMad(price)}</p>
-        <div className="mt-3 flex flex-wrap gap-2">
-          <Link href={`/products/${product.id}`} onClick={(event) => event.stopPropagation()} className="btn-outline-white px-4 py-2 text-sm">{content.view_details}</Link>
-          <CartProductButton product={product} lang={lang} label={content.add_to_cart} />
+    <StoreCard
+      href={`/products/${product.id}`}
+      image={product.image_url || '/beach-summer.png'}
+      title={productName(product, lang)}
+      description={productDescription(product, lang)}
+      price={price}
+      original={original}
+      detailsLabel={content.view_details}
+      action={<CartProductButton product={product} lang={lang} label={content.add_to_cart} />}
+      imageSizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+      index={index}
+    />
+  );
+}
+
+function StoreCard({
+  href,
+  image,
+  title,
+  description,
+  price,
+  original,
+  detailsLabel,
+  action,
+  imageSizes,
+  index
+}: {
+  href: string;
+  image: string;
+  title: string;
+  description: string;
+  price: number;
+  original: number;
+  detailsLabel: string;
+  action: React.ReactNode;
+  imageSizes: string;
+  index: number;
+}) {
+  return (
+    <MotionArticle
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.45, delay: Math.min(index * 0.06, 0.24), ease: 'easeOut' }}
+      whileHover={{ y: -8 }}
+      className="group overflow-hidden rounded-[24px] border border-white/15 bg-[rgba(96,150,175,0.65)] shadow-[0_18px_48px_rgba(18,70,92,0.18)] backdrop-blur-[10px] transition-shadow duration-300 ease-out hover:shadow-[0_26px_70px_rgba(18,70,92,0.26)]"
+    >
+      <Link href={href} className="block">
+        <div className="relative h-[250px] w-full overflow-hidden rounded-t-[24px] bg-ocean md:h-[320px]">
+          <Image src={image} alt={title} fill sizes={imageSizes} loading="lazy" quality={82} className="object-cover object-center transition-transform duration-300 ease-out group-hover:scale-105" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/28 to-transparent" />
+        </div>
+      </Link>
+      <div className="flex min-h-[278px] flex-col p-6">
+        <h3 className="text-[28px] font-black leading-tight text-[#F5A623] md:text-[34px]">{title}</h3>
+        <p className="mt-3 line-clamp-3 min-h-[4.5rem] text-base leading-6 text-white">{description}</p>
+        <div className="mt-5 flex items-end gap-3">
+          <span className="price-text text-[34px] font-black leading-none text-[#F5A623]">{formatMad(price)}</span>
+          {original > price && <span className="pb-1 text-sm font-bold text-white/55 line-through">{formatMad(original)}</span>}
+        </div>
+        <div className="mt-auto grid gap-3 pt-6 sm:grid-cols-2">
+          <Link href={href} className="inline-flex h-12 items-center justify-center rounded-full bg-white px-5 text-sm font-black text-ink shadow-sm transition duration-300 ease-out hover:scale-[1.03]">
+            {detailsLabel}
+          </Link>
+          {action}
         </div>
       </div>
-    </article>
+    </MotionArticle>
   );
 }
 
 function CartProductButton({ product, lang, label }: { product: Product; lang: Lang; label: string }) {
   const addItem = useCart((s) => s.addItem);
-  return <button type="button" onClick={(event) => { event.stopPropagation(); addItem({ id: product.id, type: 'product', name: productName(product, lang), image: product.image_url, price: activePrice(product) }); }} className="btn-coral px-4 py-2 text-sm">{label}</button>;
+  return <button type="button" onClick={() => addItem({ id: product.id, type: 'product', name: productName(product, lang), image: product.image_url, price: activePrice(product) })} className="inline-flex h-12 items-center justify-center rounded-full bg-[#FF6B6B] px-5 text-sm font-black text-white shadow-sm transition duration-300 ease-out hover:scale-[1.03] hover:bg-[#ff5252]">{label}</button>;
 }
 
 function CartPackButton({ pack, lang, label }: { pack: Pack; lang: Lang; label: string }) {
   const addItem = useCart((s) => s.addItem);
-  return <button type="button" onClick={(event) => { event.stopPropagation(); addItem({ id: pack.id, type: 'pack', name: packName(pack, lang), image: pack.image_url, price: packActivePrice(pack) }); }} className="btn-coral px-4 py-2 text-sm">{label}</button>;
+  return <button type="button" onClick={() => addItem({ id: pack.id, type: 'pack', name: packName(pack, lang), image: pack.image_url, price: packActivePrice(pack) })} className="inline-flex h-12 items-center justify-center rounded-full bg-[#FF6B6B] px-5 text-sm font-black text-white shadow-sm transition duration-300 ease-out hover:scale-[1.03] hover:bg-[#ff5252]">{label}</button>;
 }
 
 function PriceLine({ price, original, compact = false }: { price: number; original: number; compact?: boolean }) {
