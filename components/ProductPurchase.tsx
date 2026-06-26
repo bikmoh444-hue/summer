@@ -23,12 +23,12 @@ export function ProductPurchase({
 }) {
   const [quantity, setQuantity] = useState(1);
   return (
-    <div className="mt-6" onClick={(event) => event.stopPropagation()}>
+    <div className="mt-6 max-w-full overflow-hidden" onClick={(event) => event.stopPropagation()}>
       {showSummary && (
         <>
           <p className="mt-2 line-clamp-2 text-sm text-white/80">{description}</p>
-          <div className="mt-4 flex items-end gap-3 text-sm">
-            <span className="price-text text-3xl">{formatMad(price)}</span>
+          <div className="mt-4 flex flex-wrap items-end gap-3 text-sm">
+            <span className="price-text text-[30px] leading-none">{formatMad(price)}</span>
             {original > price && <span className="pb-1 font-bold text-white/55 line-through">{formatMad(original)}</span>}
           </div>
         </>
@@ -42,7 +42,7 @@ export function ProductPurchase({
           <Plus className="h-4 w-4" />
         </button>
       </div>
-      <div className="grid gap-3 sm:grid-cols-2 [&>button]:w-full [&>button]:justify-center">
+      <div className="grid max-w-full grid-cols-1 gap-3 sm:grid-cols-2 [&>button]:w-full [&>button]:justify-center">
         <AddProductButton product={product} quantity={quantity} lang={lang} />
         <AddProductButton product={product} quantity={quantity} lang={lang} orderNow />
       </div>

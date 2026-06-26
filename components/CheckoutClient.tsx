@@ -105,8 +105,8 @@ export function CheckoutClient() {
   if (!items.length) {
     return (
       <main className="summer-site min-h-screen text-white" style={{ '--site-bg': "url('/beach-summer.png')" } as React.CSSProperties}>
-        <div className="summer-overlay grid min-h-screen place-items-center px-4">
-          <div className="card-glass max-w-md p-8 text-center">
+        <div className="summer-overlay mobile-page-pad grid min-h-screen place-items-center px-4">
+          <div className="card-glass w-full max-w-md p-8 text-center">
             <h1 className="text-3xl font-black">Votre panier est vide</h1>
             <Link href="/" className="btn-coral mt-5 inline-flex">Retour boutique</Link>
           </div>
@@ -117,16 +117,16 @@ export function CheckoutClient() {
 
   return (
     <main className="summer-site min-h-screen text-white" style={{ '--site-bg': "url('/beach-summer.png')" } as React.CSSProperties}>
-      <div className="summer-overlay min-h-screen px-4 py-8">
-        <div className="mx-auto max-w-6xl">
+      <div className="summer-overlay mobile-page-pad min-h-screen px-4 py-8 sm:px-6">
+        <div className="mx-auto max-w-6xl overflow-hidden">
           <div className="mb-6 flex items-center justify-between gap-4">
             <Link href="/" className="font-cocktail text-2xl text-primary"> Summer</Link>
             <Link href="/cart" className="btn-outline-white px-4 py-2 text-sm">Panier</Link>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-[1fr_390px]">
-            <form onSubmit={handleSubmit} className="card-glass p-5 md:p-7">
-              <h1 className="mb-6 text-3xl font-black">Finaliser la commande</h1>
+          <div className="grid max-w-full grid-cols-1 gap-6 lg:grid-cols-[1fr_390px]">
+            <form onSubmit={handleSubmit} className="card-glass max-w-full overflow-hidden p-5 md:p-7">
+              <h1 className="mb-6 break-words text-[30px] font-black leading-tight sm:text-3xl">Finaliser la commande</h1>
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field icon={<UserRound className="h-4 w-4" />} error={errors.full_name}>
                   <input value={form.full_name} onChange={(e) => setForm({ ...form, full_name: e.target.value })} placeholder="Nom complet" className="form-input" />
@@ -158,19 +158,19 @@ export function CheckoutClient() {
               </button>
             </form>
 
-            <aside className="card-glass h-fit p-5">
+            <aside className="card-glass h-fit max-w-full overflow-hidden p-5">
               <h2 className="mb-4 text-2xl font-black">Resume</h2>
               <div className="space-y-4">
                 {items.map((item) => (
-                  <div key={`${item.type}-${item.id}`} className="flex gap-3">
+                  <div key={`${item.type}-${item.id}`} className="flex min-w-0 gap-3">
                     <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl">
                       <Image src={item.image || '/beach-summer.png'} alt={item.name} fill sizes="56px" loading="lazy" quality={60} className="object-cover" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate font-bold">{item.name}</p>
+                      <p className="line-clamp-2 font-bold leading-tight">{item.name}</p>
                       <p className="text-sm text-white/65">x{item.quantity}</p>
                     </div>
-                    <strong>{formatMad(item.price * item.quantity)}</strong>
+                    <strong className="shrink-0 text-right">{formatMad(item.price * item.quantity)}</strong>
                   </div>
                 ))}
               </div>
@@ -178,9 +178,9 @@ export function CheckoutClient() {
                 <Row label="Sous-total" value={formatMad(subtotal)} />
                 <Row label="Livraison" value={formatMad(delivery)} />
                 <Row label="Paiement" value="Paiement a la livraison" />
-                <div className="flex items-end justify-between pt-3 text-lg">
+                <div className="flex flex-wrap items-end justify-between gap-2 pt-3 text-lg">
                   <span className="font-black">Total</span>
-                  <span className="price-text text-3xl">{formatMad(total)}</span>
+                  <span className="price-text text-[30px] leading-none">{formatMad(total)}</span>
                 </div>
               </div>
             </aside>

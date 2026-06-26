@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getPackWithProducts } from '@/lib/data';
 import { activePrice, formatMad, packActivePrice, packDetails, packName, packOriginalPrice, productName } from '@/lib/pricing';
 import { PackPurchase } from '@/components/PackPurchase';
+import { DetailImageGallery } from '@/components/DetailImageGallery';
 
 export default async function PackDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -27,43 +28,36 @@ export default async function PackDetailsPage({ params }: { params: Promise<{ id
 
   return (
     <main className="summer-site min-h-screen text-white" style={{ '--site-bg': "url('/beach-summer.png')" } as React.CSSProperties}>
-      <div className="summer-overlay min-h-screen">
+      <div className="summer-overlay mobile-page-pad min-h-screen">
         <Header />
-        <section className="relative h-64 w-full overflow-hidden">
-          <Image src={pack.image_url || '/beach-summer.png'} alt={packName(pack)} fill sizes="100vw" priority quality={74} className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-ocean via-ocean/40 to-transparent" />
-        </section>
+        <DetailImageGallery images={gallery} alt={packName(pack)} hero />
 
-        <section className="mx-auto max-w-6xl px-4 py-8">
-          <nav className="mb-6 text-sm font-bold text-white/75">
+        <section className="mx-auto max-w-6xl overflow-hidden px-4 py-8 sm:px-6">
+          <nav className="mb-6 max-w-full overflow-hidden text-sm font-bold text-white/75">
             <Link href="/" className="hover:text-white">Accueil</Link> <span className="mx-2">/</span>
             <Link href="/#packs" className="hover:text-white">Packs</Link> <span className="mx-2">/</span>
-            <span className="text-primary">{packName(pack)}</span>
+            <span className="break-words text-primary">{packName(pack)}</span>
           </nav>
 
-          <div className="grid gap-8 lg:grid-cols-[1fr_420px]">
-            <div className="card-glass p-5 md:p-7">
-              <h1 className="text-4xl font-black md:text-6xl">{packName(pack)}</h1>
-              <p className="mt-5 text-lg leading-8 text-white/85">{packDetails(pack)}</p>
+          <div className="grid max-w-full gap-8 lg:grid-cols-[1fr_420px]">
+            <div className="card-glass max-w-full overflow-hidden p-5 md:p-7">
+              <h1 className="break-words text-[34px] font-black leading-[1.1] md:text-6xl">{packName(pack)}</h1>
+              <p className="mt-5 text-base leading-7 text-white/85 md:text-lg md:leading-8">{packDetails(pack)}</p>
               {gallery.length > 1 && (
-                <div className="mt-6 grid grid-cols-4 gap-3">
-                  {gallery.slice(0, 4).map((url) => (
-                    <div key={url} className="relative aspect-square overflow-hidden rounded-xl border border-white/20 bg-white/10">
-                      <Image src={url} alt={packName(pack)} fill sizes="120px" loading="lazy" quality={60} className="object-cover" />
-                    </div>
-                  ))}
+                <div className="mt-6">
+                  <DetailImageGallery images={gallery} alt={packName(pack)} />
                 </div>
               )}
 
               <h2 className="mt-8 text-2xl font-black text-white">Produits inclus</h2>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 {(pack.pack_products ?? []).map((entry) => entry.product && (
-                  <div key={entry.id} className="flex gap-3 rounded-2xl bg-white/10 p-3">
+                  <div key={entry.id} className="flex max-w-full gap-3 overflow-hidden rounded-2xl bg-white/10 p-3">
                     <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl">
                       <Image src={entry.product.image_url || '/beach-summer.png'} alt={productName(entry.product)} fill sizes="80px" loading="lazy" quality={60} className="object-cover" />
                     </div>
-                    <div>
-                      <p className="font-black">{productName(entry.product)}</p>
+                    <div className="min-w-0">
+                      <p className="line-clamp-2 font-black">{productName(entry.product)}</p>
                       <p className="text-sm text-white/70">x{entry.quantity} - {formatMad(activePrice(entry.product))}</p>
                     </div>
                   </div>
@@ -71,10 +65,10 @@ export default async function PackDetailsPage({ params }: { params: Promise<{ id
               </div>
             </div>
 
-            <aside className="card-glass h-fit p-5 md:p-6">
+            <aside className="card-glass h-fit max-w-full overflow-hidden p-5 md:p-6">
               {discount > 0 && <span className="rounded-full bg-coral px-4 py-2 text-sm font-black">-{discount}%</span>}
-              <div className="mt-5 flex items-end gap-3">
-                <span className="price-text text-5xl">{formatMad(price)}</span>
+              <div className="mt-5 flex flex-wrap items-end gap-3">
+                <span className="price-text text-[38px] leading-none md:text-5xl">{formatMad(price)}</span>
                 {original > price && <span className="pb-2 text-lg font-bold text-white/45 line-through">{formatMad(original)}</span>}
               </div>
               <p className="mt-2 text-sm text-white/70">Prix original calcule depuis les produits: {formatMad(original)}</p>
@@ -89,10 +83,10 @@ export default async function PackDetailsPage({ params }: { params: Promise<{ id
 
 function Header() {
   return (
-    <header className="border-b border-white/15 bg-ocean/35 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
-        <Link href="/" className="font-cocktail text-2xl text-primary">Cosmitiq Summer</Link>
-        <Link href="/cart" className="btn-coral text-sm">Panier</Link>
+    <header className="sticky top-0 z-40 border-b border-white/15 bg-ocean/35 backdrop-blur-md">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 overflow-hidden px-4 py-3 sm:px-6">
+        <Link href="/" className="truncate font-cocktail text-xl text-primary sm:text-2xl">Cosmitiq Summer</Link>
+        <Link href="/cart" className="btn-coral shrink-0 px-4 py-2 text-sm">Panier</Link>
       </div>
     </header>
   );

@@ -13,10 +13,16 @@
 }
 
 html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
 body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   margin: 0;
   color: #14323f;
   background: #6fa9c6;
@@ -53,6 +59,9 @@ select {
 }
 
 .summer-site {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   background-image: var(--site-bg);
   background-attachment: scroll;
   background-position: center;
@@ -61,6 +70,9 @@ select {
 }
 
 .summer-overlay {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at top left, rgba(245, 166, 35, 0.16), transparent 30rem),
     linear-gradient(180deg, rgba(111, 169, 198, 0.34), rgba(136, 199, 216, 0.26));
@@ -203,7 +215,7 @@ select {
   .glass-panel,
   .glass-card,
   .card-glass {
-    backdrop-filter: none;
+    backdrop-filter: blur(8px);
     box-shadow: 0 10px 24px rgba(4, 30, 40, 0.18);
   }
 
@@ -218,6 +230,12 @@ select {
   .animate-rise,
   .animate-float {
     animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .mobile-page-pad {
+    padding-bottom: 110px;
   }
 }
 

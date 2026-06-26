@@ -17,7 +17,7 @@ export function AddProductButton({ product, quantity = 1, orderNow = false, lang
         setDone(true);
         if (orderNow) window.location.href = '/checkout';
       }}
-      className="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-black text-white shadow-lg transition hover:-translate-y-0.5"
+      className="focus-ring inline-flex min-h-[48px] max-h-[54px] items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-black text-white shadow-lg transition hover:-translate-y-0.5"
     >
       {orderNow ? <Zap className="h-4 w-4" /> : <ShoppingBag className="h-4 w-4" />}
       {done ? 'Ajoute' : orderNow ? 'Commander' : 'Ajouter au panier'}
@@ -36,7 +36,7 @@ export function AddPackButton({ pack, quantity = 1, orderNow = false, lang = 'fr
         setDone(true);
         if (orderNow) window.location.href = '/checkout';
       }}
-      className="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-[var(--secondary)] px-5 py-3 text-sm font-black text-white shadow-lg transition hover:-translate-y-0.5"
+      className="focus-ring inline-flex min-h-[48px] max-h-[54px] items-center justify-center gap-2 rounded-full bg-[var(--secondary)] px-5 py-3 text-sm font-black text-white shadow-lg transition hover:-translate-y-0.5"
     >
       {orderNow ? <Zap className="h-4 w-4" /> : <ShoppingBag className="h-4 w-4" />}
       {done ? 'Ajoute' : orderNow ? 'Commander' : 'Ajouter au panier'}
