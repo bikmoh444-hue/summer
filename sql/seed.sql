@@ -4,8 +4,8 @@ insert into public.landing_settings (
   promo_text_ar, promo_text_fr, footer_text_ar, footer_text_fr, whatsapp_number, content_ar, content_fr
 ) values (
   '00000000-0000-0000-0000-000000000001',
-  'كوزميتيك صيف',
-  'Cosmitiq Summer',
+  ' صيف',
+  ' Summer',
   '',
   'لمسة صيف فاخرة لكل خرجات البحر',
   'Votre routine plage, plus belle et plus simple',

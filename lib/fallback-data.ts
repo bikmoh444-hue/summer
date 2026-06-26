@@ -3,7 +3,7 @@ import type { LandingSettings, Pack, Product } from '@/lib/types';
 export const fallbackSettings: LandingSettings = {
   id: '00000000-0000-0000-0000-000000000001',
   logo_text_ar: 'كوزميتيك صيف',
-  logo_text_fr: 'Cosmitiq Summer',
+  logo_text_fr: 'itiq Summer',
   logo_image_url: '',
   hero_title_ar: 'لمسة صيف فاخرة لكل خرجات البحر',
   hero_title_fr: 'Votre routine plage, plus belle et plus simple',
@@ -15,7 +15,7 @@ export const fallbackSettings: LandingSettings = {
   promo_text_ar: 'عرض محدود على باك الصيف الكامل',
   promo_text_fr: 'Offre limitee sur le pack ete complet',
   footer_text_ar: 'كوزميتيك صيف - طلبات بسيطة وتوصيل 45 درهم.',
-  footer_text_fr: 'Cosmitiq Summer - commandes simples, livraison 45 MAD.',
+  footer_text_fr: 'Summer - commandes simples, livraison 45 MAD.',
   whatsapp_number: '+212600000000',
   content_ar: {
     nav_packs: 'الباكات',

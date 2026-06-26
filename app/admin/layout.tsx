@@ -57,7 +57,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="flex h-full flex-col p-4">
           <Link href="/" className="mb-6 flex items-center gap-3 px-2 py-2">
             <span className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-primary">C</span>
-            <span className="font-cocktail text-xl text-primary">Cosmitiq</span>
+            <span className="font-cocktail text-xl text-primary">summer</span>
           </Link>
           <nav className="flex-1 space-y-1">
             {navItems.map((item) => <NavLink key={item.href} item={item} active={pathname === item.href} />)}
@@ -70,7 +70,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </aside>
 
       <header className="fixed inset-x-0 top-0 z-40 flex items-center justify-between border-b border-white/10 bg-[#14323f] px-4 py-3 lg:hidden">
-        <span className="font-cocktail text-lg text-primary">Cosmitiq</span>
+        <span className="font-cocktail text-lg text-primary">summer</span>
         <button onClick={() => setMobileOpen((value) => !value)} className="grid h-10 w-10 place-items-center rounded-xl bg-white/10">
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>

@@ -27,7 +27,7 @@ export default function AdminLoginPage() {
   return (
     <main className="grid min-h-screen place-items-center bg-ocean p-4">
       <form onSubmit={handleSubmit} className="bg-white/10 rounded-2xl border border-white/20 backdrop-blur-sm w-full max-w-sm p-6 text-white">
-        <h1 className="font-cocktail text-3xl text-primary">🌊 Cosmitiq</h1>
+        <h1 className="font-cocktail text-3xl text-primary">🌊 summer</h1>
         <p className="mt-2 text-sm text-white/60">Administration sécurisée</p>
         <div className="mt-5 space-y-4">
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full h-11 rounded-xl border border-white/20 bg-white/10 px-3 text-white placeholder:text-white/40 focus:border-[#F5A623] focus:outline-none" required />

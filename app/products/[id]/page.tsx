@@ -62,7 +62,7 @@ function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/15 bg-ocean/35 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 overflow-hidden px-4 py-3 sm:px-6">
-        <Link href="/" className="truncate font-cocktail text-xl text-primary sm:text-2xl">Cosmitiq </Link>
+        <Link href="/" className="truncate font-cocktail text-xl text-primary sm:text-2xl">summer </Link>
         <Link href="/cart" className="btn-coral shrink-0 px-4 py-2 text-sm">Panier</Link>
       </div>
     </header>

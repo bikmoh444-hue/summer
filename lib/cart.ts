@@ -63,7 +63,7 @@ export const useCart = create<CartStore>()(
       getCount: () => get().items.reduce((sum, item) => sum + item.quantity, 0),
       getDeliveryFee: () => DELIVERY_FEE
     }),
-    { name: 'cosmitiq-cart' }
+    { name: 'summer-cart' }
   )
 );
 
