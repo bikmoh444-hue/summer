@@ -16,8 +16,8 @@ insert into public.landing_settings (
   '#ff6f61',
   'عرض محدود على باك الصيف الكامل',
   'Offre limitee sur le pack ete complet',
-  'كوزميتيك صيف - طلبات بسيطة وتوصيل 45 درهم.',
-  'Cosmitiq Summer - commandes simples, livraison 45 MAD.',
+  'كوزميتيك صيف - طلبات بسيطة وتوصيل 35 درهم.',
+  'Cosmitiq Summer - commandes simples, livraison 35 MAD.',
   '+212600000000',
   '{
     "nav_packs": "الباكات",

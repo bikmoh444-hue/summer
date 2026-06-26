@@ -12,7 +12,7 @@ export interface CartItem {
   type: 'product' | 'pack';
 }
 
-const DELIVERY_FEE = 45;
+const DELIVERY_FEE = 35;
 
 interface CartStore {
   items: CartItem[];

@@ -76,7 +76,7 @@ create table if not exists public.orders (
   address text not null,
   city text not null,
   subtotal numeric(12,2) not null check (subtotal >= 0),
-  delivery_fee numeric(12,2) not null default 45 check (delivery_fee >= 0),
+  delivery_fee numeric(12,2) not null default 35 check (delivery_fee >= 0),
   total numeric(12,2) not null check (total >= 0),
   status text not null default 'pending' check (status in ('pending','in_progress','delivered','cancelled')),
   created_at timestamptz not null default now()

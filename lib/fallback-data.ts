@@ -14,8 +14,8 @@ export const fallbackSettings: LandingSettings = {
   secondary_color: '#ff6f61',
   promo_text_ar: 'عرض محدود على باك الصيف الكامل',
   promo_text_fr: 'Offre limitee sur le pack ete complet',
-  footer_text_ar: 'كوزميتيك صيف - طلبات بسيطة وتوصيل 45 درهم.',
-  footer_text_fr: 'Summer - commandes simples, livraison 45 MAD.',
+  footer_text_ar: 'كوزميتيك صيف - طلبات بسيطة وتوصيل 35 درهم.',
+  footer_text_fr: 'Summer - commandes simples, livraison 35 MAD.',
   whatsapp_number: '+212600000000',
   content_ar: {
     nav_packs: 'الباكات',
