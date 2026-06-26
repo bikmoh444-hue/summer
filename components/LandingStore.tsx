@@ -76,8 +76,7 @@ export function LandingStore({ settings, products, packs }: { settings: LandingS
         </section>
 
         <section id="packs" className="mx-auto max-w-7xl overflow-hidden px-4 py-10 sm:px-6">
-          <SectionTitle title={content.packs_title} />
-          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {visiblePacks.map((pack, index) => <PackCard key={pack.id} pack={pack} lang={lang} content={content} index={index} />)}
           </div>
         </section>

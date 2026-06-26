@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Cairo, Pacifico, Poppins } from "next/font/google";
 import { CartProvider } from "@/components/CartProvider";
 import "./globals.css";
@@ -18,9 +17,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="fr">
       <body className={`${poppins.variable} ${cairo.variable} ${pacifico.variable}`}>
         <CartProvider>{children}</CartProvider>
-        <Link href="/admin" aria-label="Administration" className="fixed bottom-4 right-4 z-50 grid h-10 w-10 place-items-center rounded-full bg-white/70 text-xs font-black text-ink opacity-30 shadow hover:opacity-80">
-          Admin
-        </Link>
       </body>
     </html>
   );
