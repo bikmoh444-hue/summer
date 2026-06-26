@@ -9,3 +9,7 @@
 -- The app now uses:
 -- landing_settings, products, packs, pack_products, orders, and order_items
 -- exactly as defined in sql/schema.sql.
+
+update public.landing_settings
+set footer_text_fr = 'Cosmitiq Summer - commandes simples, livraison 35 MAD.'
+where footer_text_fr = 'Cosmitiq Summer - commandes simples, livraison 45 MAD.';
